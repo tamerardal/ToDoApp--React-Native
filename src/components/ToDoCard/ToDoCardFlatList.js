@@ -1,44 +1,41 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, SafeAreaView, View, Text, Alert} from 'react-native';
 import ToDoCard from './ToDoCard';
 import styles from './ToDoCard.styles';
 import AddToDo from '../ToDoAdd/ToDoInput';
 
-const ToDoCardFlatList = todo => {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      title: 'Test',
-      isCompleted: true,
-    },
-  ]);
+let dataTodo = [];
 
+const ToDoCardFlatList = () => {
+  const [todos, setTodos] = useState(dataTodo);
   const [input, setInput] = useState('');
   // const [todos, setTodos] = useState(tododata);
-
   const handleAddToDo = () => {
-    if (input === '') {
-      return Alert.alert('Boş ekleme yapamazsınız.');
-    }
-
-    setTodos([...todos, {title: input, id: Math.random(), isCompleted: true}]);
-    console.log(input);
+    let todoItem = {
+      id: Math.random(),
+      title: input.trim(),
+      isCompleted: true,
+    };
+    dataTodo.push(todoItem);
+    setTodos(dataTodo);
     setInput('');
   };
-  console.log(todos);
+
+  const changeIsDone = id => {
+    dataTodo.map(item => {
+      if (item.id === id) {
+        item.isCompleted = false;
+        return item;
+      } else {
+        return item;
+      }
+    });
+    setTodos(dataTodo);
+  };
+
   const renderToDo = ({item}) => (
     <ToDoCard todo={item} isChanged={changeIsDone} />
   );
-
-  const changeIsDone = id => {
-    const newTodoList = todos.map(todo => {
-      if (todo.id === id) {
-        todo.isCompleted = !todo.isCompleted;
-      }
-      return todos;
-    });
-    setTodos(newTodoList);
-  };
 
   const activeTodo = todos.filter(todo => todo.isCompleted);
   return (
@@ -46,6 +43,7 @@ const ToDoCardFlatList = todo => {
       <FlatList
         data={todos}
         renderItem={renderToDo}
+        keyExtractor={item => item.id.toString()}
         ListHeaderComponent={() => {
           return (
             <View style={styles.headerContainer}>

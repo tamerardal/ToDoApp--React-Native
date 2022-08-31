@@ -7,7 +7,6 @@ import {
   StyleSheet,
 } from 'react-native';
 import React, {useState} from 'react';
-import tododata from '../../todo-data.json';
 
 const Separator = () => <View style={styles.separator} />;
 
