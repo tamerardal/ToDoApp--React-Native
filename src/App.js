@@ -1,13 +1,13 @@
 import React from 'react';
-import {View, SafeAreaView, Text, StyleSheet} from 'react-native';
+import {View, SafeAreaView, StyleSheet} from 'react-native';
 import ToDoCardFlatList from './components/ToDoCard/ToDoCardFlatList';
+import AddToDo from './components/ToDoAdd/ToDoInput';
 
 function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <ToDoCardFlatList />
-      </View>
+      <ToDoCardFlatList />
+      <AddToDo />
     </SafeAreaView>
   );
 }
@@ -16,16 +16,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#2f4f4f',
-  },
-  header: {
-    fontSize: 32,
-    fontWeight: '700',
-    color: 'orange',
-    padding: 5,
-    paddingLeft: 10,
-  },
-  headerContainer: {
-    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 10,
   },
 });
 
