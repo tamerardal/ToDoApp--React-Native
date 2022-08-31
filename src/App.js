@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, SafeAreaView, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {View, SafeAreaView, StyleSheet, Alert} from 'react-native';
 import ToDoCardFlatList from './components/ToDoCard/ToDoCardFlatList';
 import AddToDo from './components/ToDoAdd/ToDoInput';
 
@@ -7,7 +7,6 @@ function App() {
   return (
     <SafeAreaView style={styles.container}>
       <ToDoCardFlatList />
-      <AddToDo />
     </SafeAreaView>
   );
 }

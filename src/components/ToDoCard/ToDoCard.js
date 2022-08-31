@@ -1,19 +1,18 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './ToDoCard.styles';
 
-const ToDoCard = ({todo}) => {
+const ToDoCard = ({todo, isChanged}) => {
   return (
     <View>
-      {todo.isCompleted ? (
-        <View style={styles.noncontainer}>
-          <Text style={styles.title}>{todo.title}</Text>
+      <TouchableOpacity onPress={isChanged}>
+        <View
+          style={todo.isCompleted ? styles.noncontainer : styles.compContainer}>
+          <Text style={todo.isCompleted ? styles.title : styles.titleComp}>
+            {todo.title}
+          </Text>
         </View>
-      ) : (
-        <View style={styles.compContainer}>
-          <Text style={styles.titleComp}>{todo.title}</Text>
-        </View>
-      )}
+      </TouchableOpacity>
     </View>
   );
 };
