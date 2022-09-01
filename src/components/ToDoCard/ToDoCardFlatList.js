@@ -9,7 +9,7 @@ let dataTodo = [];
 const ToDoCardFlatList = () => {
   const [todos, setTodos] = useState(dataTodo);
   const [input, setInput] = useState('');
-  // const [todos, setTodos] = useState(tododata);
+
   const handleAddToDo = () => {
     let todoItem = {
       id: Math.random(),
@@ -42,21 +42,25 @@ const ToDoCardFlatList = () => {
     <ToDoCard todo={item} onPress={changeIsDone} onLongPress={deleteTodo} />
   );
 
+  const listHeader = () => {
+    return (
+      <View style={styles.headerContainer}>
+        <Text style={styles.header}>Yapılacaklar</Text>
+        <Text style={styles.header}>{activeTodo.length}</Text>
+      </View>
+    );
+  };
+
   const activeTodo = todos.filter(todo => todo.isCompleted);
+  const todoKey = item => item.id.toString();
+
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'space-between'}}>
       <FlatList
         data={todos}
         renderItem={renderToDo}
-        keyExtractor={item => item.id.toString()}
-        ListHeaderComponent={() => {
-          return (
-            <View style={styles.headerContainer}>
-              <Text style={styles.header}>Yapılacaklar</Text>
-              <Text style={styles.header}>{activeTodo.length}</Text>
-            </View>
-          );
-        }}
+        keyExtractor={todoKey}
+        ListHeaderComponent={listHeader}
       />
       <AddToDo
         handleAddToDo={handleAddToDo}
