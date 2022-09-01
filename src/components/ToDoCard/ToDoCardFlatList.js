@@ -21,6 +21,11 @@ const ToDoCardFlatList = () => {
     setInput('');
   };
 
+  const deleteTodo = id => {
+    dataTodo = dataTodo.filter(item => item.id !== id);
+    setTodos(dataTodo);
+  };
+
   const changeIsDone = id => {
     dataTodo.map(item => {
       if (item.id === id) {
@@ -34,7 +39,7 @@ const ToDoCardFlatList = () => {
   };
 
   const renderToDo = ({item}) => (
-    <ToDoCard todo={item} isChanged={changeIsDone} />
+    <ToDoCard todo={item} onPress={changeIsDone} onLongPress={deleteTodo} />
   );
 
   const activeTodo = todos.filter(todo => todo.isCompleted);
