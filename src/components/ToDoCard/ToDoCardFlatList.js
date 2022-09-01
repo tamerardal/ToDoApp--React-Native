@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {FlatList, SafeAreaView, View, Text, Alert} from 'react-native';
 import ToDoCard from './ToDoCard';
